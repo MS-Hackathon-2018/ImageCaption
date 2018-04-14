@@ -33,6 +33,7 @@ def make_app():
     return tornado.web.Application([
         (r"/translate/(?P<text>[^/]+)/(?P<suite>.*)", TranslateHandler),
         (r"/image-caption", ImageCaptionHandler),
+        (r"/(.*)",tornado.web.StaticFileHandler, {"path": "../frontend/dist"},),
     ])
 
 if __name__ == "__main__":
