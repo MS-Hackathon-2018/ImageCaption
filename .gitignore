@@ -1,4 +1,4 @@
-__pycache__
+backend/__pycache__
 *.swp
-venv
-.idea
+backend/venv
+backend/.idea
