@@ -22,8 +22,8 @@ class TranslateHandler(BaseHandler):
 class ImageCaptionHandler(BaseHandler):
     def post(self):
         data = self.request.body
-        with open('/tmp/test.jpg', 'wb') as fp:
-            fp.write(data)
+        # with open('/tmp/test.jpg', 'wb') as fp:
+            # fp.write(data)
         ret = ims.image_caption(data)
         print(ret)
         self.write(ret)
