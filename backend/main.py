@@ -2,6 +2,7 @@ import service as s
 import image_service as ims
 import tornado.ioloop
 import tornado.web
+import json
 
 class BaseHandler(tornado.web.RequestHandler):
     def set_default_headers(self):
@@ -21,12 +22,14 @@ class TranslateHandler(BaseHandler):
 
 class ImageCaptionHandler(BaseHandler):
     def post(self):
+        p = '/tmp/test.jpg'
         data = self.request.body
-        # with open('/tmp/test.jpg', 'wb') as fp:
-            # fp.write(data)
+        with open(p, 'wb') as fp:
+            fp.write(data)
         ret = ims.image_caption(data)
-        print(ret)
-        self.write(ret)
+        ret2 = ims.object_detection(p)
+        print(ret, ret2)
+        self.write(json.dumps(dict(c=ret, d=ret2)))
                
 
 def make_app():
