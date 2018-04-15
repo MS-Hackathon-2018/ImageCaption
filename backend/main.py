@@ -32,7 +32,7 @@ class ImageCaptionHandler(BaseHandler):
 
         if t == 'c':
             ret = ims.image_caption(p)
-            self.write(json.dumps(dict(c=ret)))
+            self.write(json.dumps(dict(c=ret["caption"])))
         elif t == 'd':
             ret = ims.object_detection(p)
             self.write(json.dumps(dict(d=ret)))
@@ -43,7 +43,7 @@ class ImageCaptionHandler(BaseHandler):
             ret = ims.image_caption(p)
             ret2 = ims.object_detection(p)
             ret3 = ims.word_detection(p)
-            self.write(json.dumps(dict(c=ret, d=ret2, w=ret3)))
+            self.write(json.dumps(dict(c=ret["caption"], d=ret2, w=ret3)))
 
 def make_app():
     # prefix = r'/hackathon'
