@@ -23,23 +23,35 @@ class TranslateHandler(BaseHandler):
         self.write(r)
 
 class ImageCaptionHandler(BaseHandler):
-    def post(self):
+    def post(self, t=None):
         
         p = tempdir + '/tmp.jpg'
         data = self.request.body
         with open(p, 'wb') as fp:
             fp.write(data)
-        ret = ims.image_caption(p)
-        ret2 = ims.object_detection(p)
-        print(ret, ret2)
-        self.write(json.dumps(dict(c=ret, d=ret2)))
-               
+
+        if t == 'c':
+            ret = ims.image_caption(p)
+            self.write(json.dumps(dict(c=ret)))
+        elif t == 'd':
+            ret = ims.object_detection(p)
+            self.write(json.dumps(dict(d=ret)))
+        elif t == 'w':
+            ret = ims.word_detection(p)
+            self.write(json.dumps(dict(w=ret)))
+        else:
+            ret = ims.image_caption(p)
+            ret2 = ims.object_detection(p)
+            ret3 = ims.word_detection(p)
+            self.write(json.dumps(dict(c=ret, d=ret2, w=ret3)))
 
 def make_app():
+    # prefix = r'/hackathon'
+    prefix = r''
     return tornado.web.Application([
-        (r"/translate/(?P<text>[^/]+)/(?P<suite>.*)", TranslateHandler),
-        (r"/image-caption", ImageCaptionHandler),
-        (r"/(.*)",tornado.web.StaticFileHandler, {"path": "../frontend/dist"},),
+        (prefix + r"/translate/(?P<text>[^/]+)/(?P<suite>.*)", TranslateHandler),
+        (prefix + r"/image-caption/(?P<t>.*)", ImageCaptionHandler),
+        (prefix + r"/(.*)",tornado.web.StaticFileHandler, {"path": "../frontend/dist"},),
     ])
 
 if __name__ == "__main__":
