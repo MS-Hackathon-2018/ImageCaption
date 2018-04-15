@@ -98,6 +98,7 @@ export default {
 
             this.cards.push(res.data.d);
             this.translate(res.data.d);
+            setTimeout(()=>document.querySelector("#cards").scrollTo(0,10000000000),100);
             console.log(res.data);
           });
         },
