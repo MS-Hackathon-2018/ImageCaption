@@ -121,6 +121,7 @@ export default {
   }
   #video {
     width: 100vw;
+    max-height: 60vh;
   }
   #play_btn {
     position: absolute;
