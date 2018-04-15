@@ -194,7 +194,7 @@ export default {
     }
   }
   #cards {
-    height: 30vh;
+    height: 240px;
     position: fixed;
     left: 0;
     right: 0;
