@@ -3,6 +3,9 @@ import image_service as ims
 import tornado.ioloop
 import tornado.web
 import json
+import platform
+import tempfile
+tempdir = '/tmp' if platform.system() == 'Darwin' else tempfile.gettempdir()
 
 class BaseHandler(tornado.web.RequestHandler):
     def set_default_headers(self):
@@ -22,7 +25,8 @@ class TranslateHandler(BaseHandler):
 
 class ImageCaptionHandler(BaseHandler):
     def post(self):
-        p = '/tmp/test.jpg'
+        
+        p = tempdir + '/tmp.jpg'
         data = self.request.body
         with open(p, 'wb') as fp:
             fp.write(data)

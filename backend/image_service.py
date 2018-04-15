@@ -4,6 +4,9 @@ from PIL import Image
 import numpy as np
 from aip import AipImageClassify
 import ssl
+import platform
+import tempfile
+tempdir = '/tmp' if platform.system() == 'Darwin' else tempfile.gettempdir()
 
 def get_file_content(filePath):
     with open(filePath, 'rb') as fp:
@@ -63,7 +66,7 @@ def object_detection(image_path):
 	width = result_temp['result']['width']
 	height = result_temp['result']['height']
 	region = im.crop((left, top, left + width, top + height))
-	region_save_path = 'temp.jpg'
+	region_save_path = tempdir + '/temp.jpg'
 	region.save(region_save_path)
 	image = get_file_content(region_save_path)
 	conn = http.client.HTTPSConnection('api.cognitive.azure.cn', context=ssl._create_unverified_context())
