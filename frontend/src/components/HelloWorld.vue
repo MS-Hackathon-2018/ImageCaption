@@ -138,24 +138,11 @@ export default {
   #video {
     width: 100vw;
   }
-  #play_btn {
+  #play_btn1 {
     position: absolute;
     z-index: 9999;
     right:10px;
-    bottom: 10px;
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: center;
-    align-items: center;
-    img {
-      width: 50%;
-      height: 50%;
-    }
-  }  #play_btn1 {
-    position: absolute;
-    z-index: 9999;
-    right:10px;
-    bottom: 10px;
+    top: 66px;
     display: flex;
     flex-flow: row nowrap;
     justify-content: center;
@@ -169,7 +156,7 @@ export default {
     position: absolute;
     z-index: 9999;
     right:100px;
-    bottom: 10px;
+    top: 66px;
     display: flex;
     flex-flow: row nowrap;
     justify-content: center;
@@ -183,7 +170,7 @@ export default {
     position: absolute;
     z-index: 9999;
     right:200px;
-    bottom: 10px;
+    top: 66px;
     display: flex;
     flex-flow: row nowrap;
     justify-content: center;
