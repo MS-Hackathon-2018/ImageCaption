@@ -4,7 +4,7 @@ export default {
   translate(text, suite) {
     return axios.get(`${API_URL}/translate/${encodeURIComponent(text)}/${encodeURIComponent(suite)}`);
   },
-  imageCaption(data) {
-    return axios.post(`${API_URL}/image-caption`, data);
+  imageCaption(data,action) {
+    return axios.post(`${API_URL}/image-caption/${action}`, data);
   },
 };
