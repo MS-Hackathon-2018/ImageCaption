@@ -20,7 +20,6 @@ class BaseHandler(tornado.web.RequestHandler):
 class TranslateHandler(BaseHandler):
     def get(self, text, suite):
         r = s._translate(text, suite)
-        print(r)
         self.write(r)
 
 class ImageCaptionHandler(BaseHandler):
@@ -30,7 +29,7 @@ class ImageCaptionHandler(BaseHandler):
         data = self.request.body
         with open(p, 'wb') as fp:
             fp.write(data)
-        ret = ims.image_caption(data)
+        ret = ims.image_caption(p)
         ret2 = ims.object_detection(p)
         print(ret, ret2)
         self.write(json.dumps(dict(c=ret, d=ret2)))
