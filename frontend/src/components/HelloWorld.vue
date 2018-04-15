@@ -1,6 +1,6 @@
 <template>
 
-  <div id="container">
+  <div id="container" @dblclick="snapshot">
     <v-toolbar color="blue">
       <v-toolbar-title class="white--text">Undefined</v-toolbar-title>
       <v-spacer></v-spacer>
@@ -38,10 +38,15 @@ export default {
     // Get access to the camera!
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
       // Not adding `{ audio: true }` since we only want video now
-      navigator.mediaDevices.getUserMedia({ video:true }).then((stream) => {
+      navigator.mediaDevices.getUserMedia({ video:{ facingMode: { exact: "environment" } }  }).then((stream) => {
         video.src = window.URL.createObjectURL(stream);
         video.play();
-      });
+      }).catch((err)=>{
+         navigator.mediaDevices.getUserMedia({ video:true }).then((stream) => {
+          video.src = window.URL.createObjectURL(stream);
+          video.play();
+        })
+    });
     }
   },
   methods: {
@@ -121,7 +126,7 @@ export default {
   }
   #video {
     width: 100vw;
-    max-height: 60vh;
+    max-height: 50vh;
   }
   #play_btn {
     position: absolute;
